@@ -1,0 +1,525 @@
+class Obstacle{ 
+    field int x; //position x
+    field int y; //position y
+    field int carril;
+    field int stepAnimation;
+    field boolean draw;
+    field int seed;
+    field boolean newCone;
+    constructor Obstacle new(int carrilRandom){
+        let stepAnimation=1;
+        let draw= true;
+        let newCone = true;
+        let carril = carrilRandom;
+        let x = 29;
+        if(carril = 0){  //
+            let y = 5;
+        }
+        if(carril=1){
+            let y = 104;
+        }
+        if(carril=2){
+            let y = 208;
+        }
+        // let x = 12;
+        // let y = 104;
+        return this;
+    }
+    method int x() {
+        return x;
+    }
+    method int y() {
+        return y;
+    }
+    method void dispose(){
+        do Memory.deAlloc(this);
+        return;
+    }
+
+    method boolean hitbox(int playerX, int playerY) {
+        var int playerXleft;
+        var int playerXright;
+        var int playerYtop;
+        var int playerYbottom;
+        let playerXleft = playerX;
+        let playerXright = playerX + 4;
+        let playerYtop = playerY;
+        let playerYbottom = playerY + 45; ////////////////////
+
+        if ((playerXleft < (x-1)) | (playerXleft = (x-1))) {
+          if (((x-1) < playerXright) | ((x-1) = playerXright)){
+            if ( playerYtop < y ) {
+              if ((y < playerYbottom) | (y = playerYbottom)){
+                do Output.moveCursor(18, 10);
+                do Output.printString("1");
+                return 2;
+              }
+            }
+            if ( (playerYtop < (y+45)) | (playerYtop = (y+45)) ) {  
+              if (((y+45) < playerYbottom) | ((y+45) = playerYbottom)){
+                do Output.moveCursor(18, 10);
+                do Output.printString("2");
+                return 2;
+              }
+            }
+          }
+        }
+
+
+        if ( (playerXleft < (x+2)) | (playerXleft = (x+2))) {  
+          if (((x+2) < playerXright) | ((x+2) = playerXright)){
+            if ( (playerYtop < y) | (playerYtop = y)) {
+              if ((y < playerYbottom) | (y = playerYbottom)){
+                do Output.moveCursor(18, 10);
+                do Output.printString("3");
+                return 2;
+              }
+            }
+            if ( (playerYtop < (y+45)) | (playerYtop = (y+45)) ) {  
+              if (((y+45) < playerYbottom) | ((y+45) < playerYbottom)){
+                do Output.moveCursor(18, 10);
+                do Output.printString("4"); 
+                return 2;
+              }
+            }
+          }
+        }
+
+        // hitbox para eje x
+        // if ( playerXleft < (x-1) ) {
+        //   if ((x-1) < playerXright){            
+        //     do Output.moveCursor(18, 10);
+        //     do Output.printString("1");
+        //     return 2;
+        //   }
+        // }
+        // if ( playerXleft < (x+2) ) {  
+        //   if ((x+2) < playerXright){
+        //     do Output.moveCursor(18, 10);
+        //     do Output.printString("2");
+        //     return 2;            
+        //   }
+        // }
+
+        // hitbox para eje y
+        // if ( playerYtop < y ) {
+        //   if (y < playerYbottom){
+        //     do Output.moveCursor(18, 10);
+        //     do Output.printString("1");
+        //     return 2;
+        //   }            
+        // }
+        // if ( playerYtop < (y+45) ) {  
+        //   if ((y+45) < playerYbottom){
+        //     do Output.moveCursor(18, 10);
+        //     do Output.printString("2");
+        //     return 2;
+        //   } 
+        // }
+
+        return 1; // el jugador no está dentro del área del obstáculo
+  }
+    
+    method void draw() {
+        var int memAddress; 
+        let memAddress = 16384+(x+(y*32));
+        // column 0
+        do Memory.poke(memAddress +64, -16384);
+        do Memory.poke(memAddress +96, -16384);
+        do Memory.poke(memAddress +128, -16384);
+        do Memory.poke(memAddress +160, -16384);
+        do Memory.poke(memAddress +192, 12288);
+        do Memory.poke(memAddress +224, 12288);
+        do Memory.poke(memAddress +256, 12288);
+        do Memory.poke(memAddress +288, 12288);
+        do Memory.poke(memAddress +320, -4096);
+        do Memory.poke(memAddress +352, -4096);
+        do Memory.poke(memAddress +384, -13312);
+        do Memory.poke(memAddress +416, -13312);
+        do Memory.poke(memAddress +448, 3072);
+        do Memory.poke(memAddress +480, 3072);
+        do Memory.poke(memAddress +512, 3072);
+        do Memory.poke(memAddress +544, 3072);
+        do Memory.poke(memAddress +576, 15360);
+        do Memory.poke(memAddress +608, 15360);
+        do Memory.poke(memAddress +640, -3328);
+        do Memory.poke(memAddress +672, -3328);
+        do Memory.poke(memAddress +704, -15616);
+        do Memory.poke(memAddress +736, -15616);
+        do Memory.poke(memAddress +768, 768);
+        do Memory.poke(memAddress +800, 768);
+        do Memory.poke(memAddress +832, 4080);
+        do Memory.poke(memAddress +864, 4080);
+        do Memory.poke(memAddress +896, 15564);
+        do Memory.poke(memAddress +928, 15564);
+        do Memory.poke(memAddress +960, -820);
+        do Memory.poke(memAddress +992, -820);
+        do Memory.poke(memAddress +1024, -16180);
+        do Memory.poke(memAddress +1056, -16180);
+        do Memory.poke(memAddress +1088, 195);
+        do Memory.poke(memAddress +1120, 195);
+        do Memory.poke(memAddress +1152, 963);
+        do Memory.poke(memAddress +1184, 963);
+        do Memory.poke(memAddress +1216, -253);
+        do Memory.poke(memAddress +1248, -253);
+        do Memory.poke(memAddress +1280, -1021);
+        do Memory.poke(memAddress +1312, -1021);
+        do Memory.poke(memAddress +1344, 15);
+        do Memory.poke(memAddress +1376, 15);
+        do Memory.poke(memAddress +1408, -4);
+        do Memory.poke(memAddress +1440, -4);
+        do Memory.poke(memAddress +1472, -16);
+        do Memory.poke(memAddress +1504, -16);
+        // column 1
+        do Memory.poke(memAddress +1, 15);
+        do Memory.poke(memAddress +33, 15);
+        do Memory.poke(memAddress +65, 48);
+        do Memory.poke(memAddress +97, 48);
+        do Memory.poke(memAddress +129, 48);
+        do Memory.poke(memAddress +161, 48);
+        do Memory.poke(memAddress +193, 192);
+        do Memory.poke(memAddress +225, 192);
+        do Memory.poke(memAddress +257, 192);
+        do Memory.poke(memAddress +289, 192);
+        do Memory.poke(memAddress +321, 240);
+        do Memory.poke(memAddress +353, 240);
+        do Memory.poke(memAddress +385, 831);
+        do Memory.poke(memAddress +417, 831);
+        do Memory.poke(memAddress +449, 783);
+        do Memory.poke(memAddress +481, 783);
+        do Memory.poke(memAddress +513, 768);
+        do Memory.poke(memAddress +545, 768);
+        do Memory.poke(memAddress +577, 960);
+        do Memory.poke(memAddress +609, 960);
+        do Memory.poke(memAddress +641, 3327);
+        do Memory.poke(memAddress +673, 3327);
+        do Memory.poke(memAddress +705, 3135);
+        do Memory.poke(memAddress +737, 3135);
+        do Memory.poke(memAddress +769, 3072);
+        do Memory.poke(memAddress +801, 3072);
+        do Memory.poke(memAddress +833, -256);
+        do Memory.poke(memAddress +865, -256);
+        do Memory.poke(memAddress +897, 13248);
+        do Memory.poke(memAddress +929, 13248);
+        do Memory.poke(memAddress +961, 13311);
+        do Memory.poke(memAddress +993, 13311);
+        do Memory.poke(memAddress +1025, 12351);
+        do Memory.poke(memAddress +1057, 12351);
+        do Memory.poke(memAddress +1089, 12288);
+        do Memory.poke(memAddress +1121, 12288);
+        do Memory.poke(memAddress +1153, 15360);
+        do Memory.poke(memAddress +1185, 15360);
+        do Memory.poke(memAddress +1217, 4095);
+        do Memory.poke(memAddress +1249, 4095);
+        do Memory.poke(memAddress +1281, 1023);
+        do Memory.poke(memAddress +1313, 1023);
+        do Memory.poke(memAddress +1409, -1);
+        do Memory.poke(memAddress +1441, -1);
+        do Memory.poke(memAddress +1473, -1);
+        do Memory.poke(memAddress +1505, -1);
+        // column 2
+        do Memory.poke(memAddress +898, 3);
+        do Memory.poke(memAddress +930, 3);
+        do Memory.poke(memAddress +962, 3);
+        do Memory.poke(memAddress +994, 3);
+        do Memory.poke(memAddress +1026, 3);
+        do Memory.poke(memAddress +1058, 3);
+        do Memory.poke(memAddress +1090, 12);
+        do Memory.poke(memAddress +1122, 12);
+        do Memory.poke(memAddress +1154, 12);
+        do Memory.poke(memAddress +1186, 12);
+        do Memory.poke(memAddress +1218, 12);
+        do Memory.poke(memAddress +1250, 12);
+        do Memory.poke(memAddress +1282, 12);
+        do Memory.poke(memAddress +1314, 12);
+        do Memory.poke(memAddress +1346, 15);
+        do Memory.poke(memAddress +1378, 15);
+        do Memory.poke(memAddress +1410, 3);
+        do Memory.poke(memAddress +1442, 3);
+        return;
+    }
+    
+    method void setSeed(int seedChanged){
+      let seed = seedChanged;
+      return;
+    }
+
+    method int getSeed(){
+      return seed;
+    }
+
+    method void update(int carrilRandom){
+        let stepAnimation=1;
+        let draw= true;
+        let newCone = true;
+        let carril = carrilRandom;
+        let x = 29;
+        if(carril = 0){
+            let y = 5;
+        }
+        if(carril=1){
+            let y = 104;
+        }
+        if(carril=2){
+            let y = 208;
+        }
+        return;
+    }
+
+    method void erase(){
+        var int memAddress; 
+        let memAddress = 16384+(x+(y*32));
+        do Memory.poke(memAddress +64, 0);
+        do Memory.poke(memAddress +96, 0);
+        do Memory.poke(memAddress +128, 0);
+        do Memory.poke(memAddress +160, 0);
+        do Memory.poke(memAddress +192, 0);
+        do Memory.poke(memAddress +224, 0);
+        do Memory.poke(memAddress +256, 0);
+        do Memory.poke(memAddress +288, 0);
+        do Memory.poke(memAddress +320, 0);
+        do Memory.poke(memAddress +352, 0);
+        do Memory.poke(memAddress +384, 0);
+        do Memory.poke(memAddress +416, 0);
+        do Memory.poke(memAddress +448, 0);
+        do Memory.poke(memAddress +480, 0);
+        do Memory.poke(memAddress +512, 0);
+        do Memory.poke(memAddress +544, 0);
+        do Memory.poke(memAddress +576, 0);
+        do Memory.poke(memAddress +608, 0);
+        do Memory.poke(memAddress +640, 0);
+        do Memory.poke(memAddress +672, 0);
+        do Memory.poke(memAddress +704, 0);
+        do Memory.poke(memAddress +736, 0);
+        do Memory.poke(memAddress +768, 0);
+        do Memory.poke(memAddress +800, 0);
+        do Memory.poke(memAddress +832, 0);
+        do Memory.poke(memAddress +864, 0);
+        do Memory.poke(memAddress +896, 0);
+        do Memory.poke(memAddress +928, 0);
+        do Memory.poke(memAddress +960, 0);
+        do Memory.poke(memAddress +992, 0);
+        do Memory.poke(memAddress +1024, 0);
+        do Memory.poke(memAddress +1056, 0);
+        do Memory.poke(memAddress +1088, 0);
+        do Memory.poke(memAddress +1120, 0);
+        do Memory.poke(memAddress +1152, 0);
+        do Memory.poke(memAddress +1184, 0);
+        do Memory.poke(memAddress +1216, 0);
+        do Memory.poke(memAddress +1248, 0);
+        do Memory.poke(memAddress +1280, 0);
+        do Memory.poke(memAddress +1312, 0);
+        do Memory.poke(memAddress +1344, 0);
+        do Memory.poke(memAddress +1376, 0);
+        do Memory.poke(memAddress +1408, 0);
+        do Memory.poke(memAddress +1440, 0);
+        do Memory.poke(memAddress +1472, 0);
+        do Memory.poke(memAddress +1504, 0);
+        // column 1
+        do Memory.poke(memAddress +1, 0);
+        do Memory.poke(memAddress +33, 0);
+        do Memory.poke(memAddress +65, 0);
+        do Memory.poke(memAddress +97, 0);
+        do Memory.poke(memAddress +129, 0);
+        do Memory.poke(memAddress +161, 0);
+        do Memory.poke(memAddress +193, 0);
+        do Memory.poke(memAddress +225, 0);
+        do Memory.poke(memAddress +257, 0);
+        do Memory.poke(memAddress +289, 0);
+        do Memory.poke(memAddress +321, 0);
+        do Memory.poke(memAddress +353, 0);
+        do Memory.poke(memAddress +385, 0);
+        do Memory.poke(memAddress +417, 0);
+        do Memory.poke(memAddress +449, 0);
+        do Memory.poke(memAddress +481, 0);
+        do Memory.poke(memAddress +513, 0);
+        do Memory.poke(memAddress +545, 0);
+        do Memory.poke(memAddress +577, 0);
+        do Memory.poke(memAddress +609, 0);
+        do Memory.poke(memAddress +641, 0);
+        do Memory.poke(memAddress +673, 0);
+        do Memory.poke(memAddress +705, 0);
+        do Memory.poke(memAddress +737, 0);
+        do Memory.poke(memAddress +769, 0);
+        do Memory.poke(memAddress +801, 0);
+        do Memory.poke(memAddress +833, 0);
+        do Memory.poke(memAddress +865, 0);
+        do Memory.poke(memAddress +897, 0);
+        do Memory.poke(memAddress +929, 0);
+        do Memory.poke(memAddress +961, 0);
+        do Memory.poke(memAddress +993, 0);
+        do Memory.poke(memAddress +1025, 0);
+        do Memory.poke(memAddress +1057, 0);
+        do Memory.poke(memAddress +1089, 0);
+        do Memory.poke(memAddress +1121, 0);
+        do Memory.poke(memAddress +1153, 0);
+        do Memory.poke(memAddress +1185, 0);
+        do Memory.poke(memAddress +1217, 0);
+        do Memory.poke(memAddress +1249, 0);
+        do Memory.poke(memAddress +1281, 0);
+        do Memory.poke(memAddress +1313, 0);
+        do Memory.poke(memAddress +1409, 0);
+        do Memory.poke(memAddress +1441, 0);
+        do Memory.poke(memAddress +1473, 0);
+        do Memory.poke(memAddress +1505, 0);
+        // column 2
+        do Memory.poke(memAddress +898, 0);
+        do Memory.poke(memAddress +930, 0);
+        do Memory.poke(memAddress +962, 0);
+        do Memory.poke(memAddress +994, 0);
+        do Memory.poke(memAddress +1026, 0);
+        do Memory.poke(memAddress +1058, 0);
+        do Memory.poke(memAddress +1090, 0);
+        do Memory.poke(memAddress +1122, 0);
+        do Memory.poke(memAddress +1154, 0);
+        do Memory.poke(memAddress +1186, 0);
+        do Memory.poke(memAddress +1218, 0);
+        do Memory.poke(memAddress +1250, 0);
+        do Memory.poke(memAddress +1282, 0);
+        do Memory.poke(memAddress +1314, 0);
+        do Memory.poke(memAddress +1346, 0);
+        do Memory.poke(memAddress +1378, 0);
+        do Memory.poke(memAddress +1410, 0);
+        do Memory.poke(memAddress +1442, 0);
+        return;
+    }
+
+    method void moveLeft(int carril){
+        if(x > 0){
+            do erase();
+            let x = x-1;
+            
+            do draw(); 
+            return;
+            
+        }
+        do erase();
+        do update(carril);
+        return;
+        // // Animación de salida
+        // if(x < 1){
+        //     do erase();
+        //     let x = x-1;
+        //     if(draw){//draw es un booleano = true
+        //         do draws();
+        //     }
+        //     if(~(draw)){ //Si es false
+        //         do deletes();
+        //     }
+        //     if(draw){
+        //         let stepAnimation= stepAnimation+1;
+        //     }
+        //     let draw = ~(draw);
+        // }
+    }
+
+    
+    method void draws(){
+        if (stepAnimation = 1) {
+            do Animacion_cono.cono1(x,y);
+          }
+          if (stepAnimation = 2) {
+            do Animacion_cono.cono2(x,y);
+          }
+          if (stepAnimation = 3) {
+            do Animacion_cono.cono3(x,y);
+          }
+          if (stepAnimation = 4) {
+            do Animacion_cono.cono4(x,y);
+          }
+          if (stepAnimation = 5) {
+            do Animacion_cono.cono5(x,y);
+          }
+          if (stepAnimation = 6) {
+            do Animacion_cono.cono6(x,y);
+          }
+          if (stepAnimation = 7) {
+            do Animacion_cono.cono7(x,y);
+          }
+          if (stepAnimation = 8) {
+            do Animacion_cono.cono8(x,y);
+          }
+          if (stepAnimation = 9) {
+            do Animacion_cono.cono9(x,y);
+          }
+          if (stepAnimation = 10) {
+            do Animacion_cono.cono10(x,y);
+          }
+          if (stepAnimation = 11) {
+            do Animacion_cono.cono11(x,y);
+          }
+          if (stepAnimation = 12) {
+            do Animacion_cono.cono12(x,y);
+          }
+          if (stepAnimation = 13) {
+            do Animacion_cono.cono13(x,y);
+          }
+          if (stepAnimation = 14) {
+            do Animacion_cono.cono14(x,y);
+          }
+          if (stepAnimation = 15) {
+            do Animacion_cono.cono15(x,y);
+          }
+          if (stepAnimation = 16) {
+            do Animacion_cono.cono16(x,y);
+          }
+          if (stepAnimation = 17) {
+            do Animacion_cono.cono17(x,y);
+          }
+        return; 
+    }
+    method void deletes(){
+        if (stepAnimation = 1) {
+            do Animacion_cono.deletecono1(x, y);
+        }
+        if (stepAnimation = 2) {
+            do Animacion_cono.deletecono2(x, y);
+        }
+        if (stepAnimation = 3) {
+            do Animacion_cono.deletecono3(x, y);
+        }
+        if (stepAnimation = 4) {
+            do Animacion_cono.deletecono4(x, y);
+        }
+        if (stepAnimation = 5) {
+            do Animacion_cono.deletecono5(x, y);
+        }
+        if (stepAnimation = 6) {
+            do Animacion_cono.deletecono6(x, y);
+        }
+        if (stepAnimation = 7) {
+            do Animacion_cono.deletecono7(x, y);
+        }
+        if (stepAnimation = 8) {
+            do Animacion_cono.deletecono8(x, y);
+        }
+        if (stepAnimation = 9) {
+            do Animacion_cono.deletecono9(x, y);
+        }
+        if (stepAnimation = 10) {
+            do Animacion_cono.deletecono10(x, y);
+        }
+        if (stepAnimation = 11) {
+            do Animacion_cono.deletecono11(x, y);
+        }
+        if (stepAnimation = 12) {
+            do Animacion_cono.deletecono12(x, y);
+        }
+        if (stepAnimation = 13) {
+            do Animacion_cono.deletecono13(x, y);
+        }
+        if (stepAnimation = 14) {
+            do Animacion_cono.deletecono14(x, y);
+        }
+        if (stepAnimation = 15) {
+            do Animacion_cono.deletecono15(x, y);
+        }
+        if (stepAnimation = 16) {
+            do Animacion_cono.deletecono16(x, y);
+        }
+        if (stepAnimation = 17) {
+            do Animacion_cono.deletecono17(x, y);
+        }
+        return;
+    }
+}
