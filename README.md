@@ -9,7 +9,7 @@ A través de Nand2Tetris se ha creado un juego de un carrito que consiste en esq
 * https://github.com/Tbernal121
 * https://github.com/dgonzalezt2
 
-## Instalacion y ejecuccion del programa
+## Instalación y ejecución del programa
 
 ### Descargar todos los archivos 
 ![image](https://github.com/dgonzalezt2/JuegoCarroJack/assets/81880494/2369095c-09ff-4ce0-acf7-d61ad231f3dd)
