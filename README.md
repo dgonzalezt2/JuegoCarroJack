@@ -25,7 +25,7 @@ Cuando abras el programa te saldra que tu PC esta protegido, seleccionas mas inf
 
 ![image](https://github.com/dgonzalezt2/JuegoCarroJack/assets/81880494/a6a08b2c-82ec-4ebe-8a98-4e69d7e46e57)
 
-Al presionar "más información", aparecerá lo siguiente y debes seleccionar "ejecutar de todos modos".
+Al presionar `más información`, aparecerá lo siguiente y debes seleccionar `ejecutar de todos modos`.
 
 ![image](https://github.com/dgonzalezt2/JuegoCarroJack/assets/81880494/bb5842b8-0c3d-46d0-a43f-e7a2edd59be2)
 
